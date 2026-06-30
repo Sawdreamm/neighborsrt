@@ -54,6 +54,6 @@ if /I "%DOWNLOAD_MODEL%"=="Y" (
 
 echo.
 echo Done.
-echo Start local web with:
-echo   start_windows.bat
+echo NeighborSRT is installed for Codex.
+echo Open Codex and use: $neighborsrt
 pause

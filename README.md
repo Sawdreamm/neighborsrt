@@ -1,12 +1,12 @@
 # NeighborSRT
 
-NeighborSRT is a local web app and Codex skill for turning Thai clinic videos into CapCut-ready `.srt` subtitles.
+NeighborSRT is a Codex skill for creating professional Thai subtitles for Neighbor Clinic-style videos.
 
-It is tuned for Neighbor Clinic-style content: facial design, skin work, Ultraformer, Botox, Bone Loss, fillers, lasers, and Thai ASR post-editing.
+It helps Codex transcribe media with Whisper, generate timed `.srt` captions, post-edit Thai ASR with clinic context, and validate subtitles for CapCut, Premiere, DaVinci Resolve, or YouTube.
 
-## Quick Start
+## Install
 
-Clone the repo, run the installer, then start the local web app.
+Clone the repo and run the installer for your OS.
 
 ### macOS
 
@@ -14,7 +14,6 @@ Clone the repo, run the installer, then start the local web app.
 git clone https://github.com/Sawdreamm/neighborsrt.git
 cd neighborsrt
 ./install_all_macos.command
-./start.command
 ```
 
 ### Windows
@@ -23,61 +22,61 @@ cd neighborsrt
 git clone https://github.com/Sawdreamm/neighborsrt.git
 cd neighborsrt
 install_all_windows.bat
-start_windows.bat
 ```
 
-Open:
-
-```text
-http://127.0.0.1:8765
-```
-
-Then drag a video or audio file into the browser page and download the generated `.srt`.
-
-## What The Installer Does
-
-The full installer attempts to install:
+The installer attempts to install:
 
 - Python 3
 - ffmpeg
 - `openai-whisper`
 - `pythainlp`
-- the included Codex skill at `~/.codex/skills/neighborsrt` or `%USERPROFILE%\.codex\skills\neighborsrt`
+- the Codex skill at `~/.codex/skills/neighborsrt` or `%USERPROFILE%\.codex\skills\neighborsrt`
 - optionally Whisper `large-v3`
 
-The Whisper model is not committed to GitHub because it is several GB. The installer can download it on first setup, or Whisper will download it on first use.
+The Whisper model is not committed because it is several GB. The installer can download it, or Whisper will download it on first use.
 
-## Use With Codex
+## Use In Codex
 
-After cloning, you can ask Codex:
+After install, open Codex and ask:
 
 ```text
-Read this repository and install the NeighborSRT skill and all local-web dependencies on this machine.
+Use $neighborsrt to transcribe this video, polish Thai clinic terms, and create a CapCut-ready SRT.
 ```
 
-Or install manually:
+Or:
+
+```text
+ใช้ NeighborSRT กับไฟล์นี้ แล้วช่วย post-edit คำไทยสายคลินิกให้ด้วย
+```
+
+## Install Manually
+
+macOS/Linux:
 
 ```bash
 mkdir -p ~/.codex/skills
+rm -rf ~/.codex/skills/neighborsrt
 cp -R skill ~/.codex/skills/neighborsrt
+python3 -m pip install -U openai-whisper pythainlp
 ```
 
-Windows:
+Windows PowerShell:
 
 ```powershell
-install_skill_windows.bat
+mkdir $env:USERPROFILE\.codex\skills -Force
+Remove-Item $env:USERPROFILE\.codex\skills\neighborsrt -Recurse -Force -ErrorAction SilentlyContinue
+Copy-Item skill $env:USERPROFILE\.codex\skills\neighborsrt -Recurse
+py -3 -m pip install -U openai-whisper pythainlp
 ```
 
-## Main Files
+## Repository Layout
 
 ```text
 neighborsrt/
-├── index.html
-├── app/server.py
+├── README.md
 ├── install_all_macos.command
 ├── install_all_windows.bat
-├── start.command
-├── start_windows.bat
+├── requirements.txt
 └── skill/
     ├── SKILL.md
     ├── agents/openai.yaml
@@ -87,7 +86,6 @@ neighborsrt/
 
 ## Notes
 
-- The local web UI runs on `127.0.0.1:8765`.
+- This repo intentionally does not include a local web app. It is meant to be used through Codex.
 - Raw Whisper output still needs AI or human post-editing for publish-ready Thai clinic subtitles.
-- The skill includes Neighbor-specific glossary and ambiguous-term handling, especially for devices and brand names.
-- Hard-sub burning depends on ffmpeg build support for subtitle filters. Soft subtitle export is safer across machines.
+- The skill includes Neighbor-specific glossary and ambiguous-term handling for beauty clinic device and treatment names.

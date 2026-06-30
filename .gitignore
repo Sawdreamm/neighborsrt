@@ -1,10 +1,6 @@
 __pycache__/
 *.pyc
 .DS_Store
-uploads/*
-outputs/*
-!uploads/.gitkeep
-!outputs/.gitkeep
 *.srt
 *.mp4
 *.mov
@@ -12,4 +8,3 @@ outputs/*
 *.wav
 *.mp3
 *.pt
-model-cache/

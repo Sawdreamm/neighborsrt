@@ -55,5 +55,5 @@ esac
 
 echo ""
 echo "Done."
-echo "Start local web with:"
-echo "  ./start.command"
+echo "NeighborSRT is installed for Codex."
+echo "Open Codex and use: \$neighborsrt"
