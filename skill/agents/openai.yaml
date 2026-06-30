@@ -1,0 +1,4 @@
+interface:
+  display_name: "NeighborSRT"
+  short_description: "Generate clinic-aware SRT captions"
+  default_prompt: "Use $neighborsrt to transcribe, polish, and validate this Neighbor Clinic video as a CapCut-ready .srt file."
